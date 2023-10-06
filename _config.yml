@@ -81,7 +81,7 @@ analytics:
 # Site Author
 author:
   name             : "Gabriel Laberge"
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   bio              : "PhD Candidate working on Explainability of Black-Box Machine Learning Models"
   location         : "Polytechnique Montreal"
   employer         :
