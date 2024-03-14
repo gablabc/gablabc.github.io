@@ -5,7 +5,6 @@ permalink: /publication/FDTrees
 excerpt: 'Compute explanations on regions defined by a decision tree'
 date: 2024-05-02
 venue: 'AISTATS'
-paperurl: 'https://hal.science/hal-04480870/document'
 citation: 'Laberge, G., Pequignot, Y., Marchand, M., & Khomh, F. (2024, May). Tackling the XAI Disagreement Problem with Regional Explanations. In International Conference on Artificial Intelligence and Statistics (AISTATS) (Vol. 238).'
 ---
 
@@ -18,4 +17,8 @@ Thus instead of providing global explanations aggregated over the whole dataset,
 as the regional explanations extracted from its leaves. The beneficial effects of FD-Trees on the Disagreement Problem are demonstrated
 on toy and real datasets
 
-[Download paper here](https://hal.science/hal-04480870/document)
+![california](/images/papers/results.png)
+
+[Paper](https://hal.science/hal-04480870/document)
+
+[Github](https://github.com/gablabc/UXAI_ANOVA)
