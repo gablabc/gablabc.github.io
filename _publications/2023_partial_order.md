@@ -2,7 +2,7 @@
 title: "Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set"
 collection: publications
 permalink: /publication/partial_order
-excerpt: 'Computing the consensys of local/global feature importance across all models in the Rashomon Set'
+excerpt: 'Computing the consensus of local/global feature importance across all models in the Rashomon Set'
 date: 2023-12-01
 venue: 'Journal of Machine Learning Research'
 citation: 'Laberge, G., Pequignot, Y., Mathieu, A., Khomh, F., & Marchand, M. (2023). Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set. Journal of Machine Learning Research, 24(364), 1-50.'
