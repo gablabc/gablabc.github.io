@@ -3,7 +3,7 @@ title: "Tackling the XAI Disagreement Problem with Regional Explanations"
 collection: publications
 permalink: /publication/FDTrees
 excerpt: 'Compute explanations on regions defined by a decision tree'
-date: 2024-05-02
+date: 2024-03-08
 venue: 'AISTATS'
 citation: 'Laberge, G., Pequignot, Y., Marchand, M., & Khomh, F. (2024, May). Tackling the XAI Disagreement Problem with Regional Explanations. In International Conference on Artificial Intelligence and Statistics (AISTATS) (Vol. 238).'
 ---
