@@ -1,12 +1,14 @@
 ---
 permalink: /
-title: "About me"
-excerpt: "About me"
+title: "Research Interests"
+excerpt: "Research Interests"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
+
+### Research Questions
 
 I am Machine Learning enthusiast who is looking to merge complex mathematical theory with real-world applications.
 My current research interests are in the field of eXplainable Artificial Intelligence (XAI), where the goal is
@@ -28,16 +30,22 @@ In what scenarios can we expect them to agree (or be contradictory)?
 2. When are practitioners allowed (disallowed) to **trust** the explanations provided? Without the existence of
 ground-truths in explainability, it is hard to define accurate trustworthiness metrics.
 
-My Doctoral degree aims at addressing both of these major concerns. First, we unify the various post-hoc explanations through the
-lens of **Functional Decompositions** and we demonstrate that disagreements are caused by so-called **Feature Interactions**.
-This discovery clarifies the relationship between the various explainers. Second, we propose to use **Uncertainty** as a proxy of
-trustworthiness of post-hoc explanations. The higher the uncertainty, the lower the trust. We define three critical types
-of uncertainties that we recommend computing in a XAI pipeline :
+### Contributions
 
-- Oversimplification uncertainty: the amount by which the explanation oversimplifies the model because of feature
-interactions.
-- Sub-sampling uncertainty : the stochasticity induced by the need to provide subsamples of data to the explainers.
-- Under-specification uncertainty : the uncertainty caused by the existence of an equivalent class of models with good
-empirical performance *i.e* a Rashomon Set.
+My Doctoral degree is part of the [DEEL](https://deel.quebec/) research initiative and aims at answered these two research questions.
+The first question is tackled in our [FDTrees](https://gablabc.github.io/publication/FDTrees.html) paper
+where various post-hoc explanations are unified through the lens of **Functional Decompositions** and it is demonstrate that
+disagreements are caused by so-called **Feature Interactions**. This discovery clarifies the relationship between the various explainers.
+For the second question, we propose to use **Uncertainty** as a proxy of trustworthiness of post-hoc explanations. The higher the
+uncertainty, the lower the trust. We define three critical types of uncertainties that we recommend computing in a XAI pipeline :
+
+- **Oversimplification uncertainty**: the amount by which the explanation oversimplifies the model because of feature
+interactions. This uncertainty is reduced by using [FDTrees](https://gablabc.github.io/publication/FDTrees.html).
+- **Sub-sampling uncertainty** : the stochasticity induced by the necessity to provide subsamples of data to the explainers
+instead of the whole dataset. The importance of considering this uncertainty is demonstrated by our
+[FoolSHAP](https://gablabc.github.io/publication/fool_SHAP.html) attack that can make an unfair model look acceptable.
+- **Under-specification uncertainty** : the uncertainty caused by the existence of an equivalent class of models with good
+empirical performance *i.e* a Rashomon Set. This methodology is introduced in our
+[JMLR](https://gablabc.github.io/publication/partial_order.html) paper.
 
 Each of these is elaborated on in a published article from my PhD thesis.
