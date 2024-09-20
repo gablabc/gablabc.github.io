@@ -1,6 +1,7 @@
 ---
 title: "Tackling the XAI Disagreement Problem with Regional Explanations"
 collection: publications
+category: conferences
 permalink: /publication/FDTrees
 excerpt: 'Compute explanations on regions defined by a decision tree'
 date: 2024-03-08

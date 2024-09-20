@@ -1,12 +1,12 @@
 ---
-title: "Fooling SHAP with Stealthily Biased Sampling "
+title: "Fooling SHAP with Stealthily Biased Sampling"
 collection: publications
+category: conferences
 permalink: /publication/fool_SHAP
 excerpt: 'Manipulating Shapley values by cherry-picking the reference samples'
 date: 2023-05-01
 venue: 'ICLR'
-citation: 'Laberge, G., Aïvodji, U., Hara, S., Marchand, M., & Khomh, F. (2023, May). 
-Fooling SHAP with Stealthily Biased Sampling. In The Eleventh International Conference on Learning Representations.'
+citation: 'Laberge, G., Aïvodji, U., Hara, S., Marchand, M., & Khomh, F. (2023, May). Fooling SHAP with Stealthily Biased Sampling. In The Eleventh International Conference on Learning Representations.'
 ---
 
 This paper demonstrates the possibility of **cherry picking** the data samples provided to SHAP in

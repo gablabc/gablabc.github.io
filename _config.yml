@@ -17,12 +17,12 @@ baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "gablabc.github.io"
 # Site Author
 author:
-  name             : "gabriel laberge"
+  name             : "Gabriel Laberge"
   avatar           : "profile.jpg"
-  bio              : "PhD candidate working on explainability of black-box machine learning models"
+  bio              : "PhD  working on explainability of black-box machine learning models"
   location         : "Polytechnique Montreal"
   employer         :
-  googlescholar    : "https://scholar.google.com/citations?user=ixx6rmwaaaaj&hl=fr&oi=ao"
+  googlescholar    : "https://scholar.google.com/citations?user=ixX6rmwAAAAJ&hl=fr&oi=ao"
   email            :
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
@@ -55,10 +55,10 @@ author:
 publication_category:
   books:
     title: 'Books'
-  manuscripts:
-    title: 'Journal Articles'    
   conferences:
     title: 'Conference Papers'
+  manuscripts:
+    title: 'Journal Articles'    
 
 
 # Site Settings

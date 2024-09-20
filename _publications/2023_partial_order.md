@@ -1,6 +1,7 @@
 ---
 title: "Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set"
 collection: publications
+category: manuscripts
 permalink: /publication/partial_order
 excerpt: 'Computing the consensus of local/global feature importance across all models in the Rashomon Set'
 date: 2023-12-01

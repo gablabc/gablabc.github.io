@@ -1,6 +1,5 @@
 ---
 permalink: /
-<<<<<<< HEAD
 title: "Research Interests"
 author_profile: true
 redirect_from: 

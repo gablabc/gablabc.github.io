@@ -1,6 +1,7 @@
 ---
 title: "Learning Hybrid Interpretable Models: Theory, Taxonomy, and Methods"
 collection: publications
+category: manuscripts
 permalink: /publication/Hybrid
 excerpt: 'Explore the Transparency-Accuracy tradeoff'
 date: 2024-09-05
