@@ -32,9 +32,9 @@ What thresholds should be used? Same thing with `time=late` and `time=early`. Th
 *learn* those thresholds (and the program itself) automatically based on historical data of bike rentals given various hours
 and temperatures. In this new paradigm, you would need access to data comprised of
 
-1. A $(N, d)$ feature matrix **X** representing the $d$ characteristics (time, temperature, day of the week etc.)
-of $N$ instances.
-2. A $(N,)$ vector **y** containing the actual number of bike rentals for the given instance.
+1. A \\((N, d)\\) feature matrix **X** representing the \\(d\\) characteristics (time, temperature, day of the week etc.)
+of \\(N\\) instances.
+2. A \\((N,)\\) vector **y** containing the actual number of bike rentals for the given instance.
 
 Here is an example of such a dataset available in the [PyFD](https://github.com/gablabc/PyFD) Python library.
 
@@ -53,22 +53,22 @@ print(features.print_names())
 >>> ['yr', 'mnth', 'hr', 'holiday', 'weekday', 'workingday', 'weathersit', 'temp', 'hum', 'windspeed']
 ```
 
-We have 17K data instances each comprised of $d=10$ time/weather features.
-Given this collection of data, one then fits a Machine Learning model $h$ in order to get accurate
-predictions of $y$ given $x$. In this blog, we will investigate three regressors:
+We have 17K data instances each comprised of \\(d=10\\) time/weather features.
+Given this collection of data, one then fits a Machine Learning model \\(h\\) in order to get accurate
+predictions of \\(y\\) given \\(x\\). In this blog, we will investigate three regressors:
 
 1. Random Forests
 2. Gradient Boosted Trees
 3. Neural Networks.
 
 To assert if these models are good or not, we have to keep aside some portion of the data (here 20%)
-and used it afterward to compute an unbiased measure of performance. The $R^2$ measure of performance is
+and used it afterward to compute an unbiased measure of performance. The \\(R^2\\) measure of performance is
 used
 
 $$R^2(h) = 1-\frac{\sum_{i\in \text{Test}}(\,h(x^{(i)})-y^{(i)}\,)^2}{\sum_{i\in \text{Test}}(\,\bar{y}-y^{(i)}\,)^2},$$
 
-where $\bar{y}$ is the average value of the target on the test set. Simply put, the $R^2$ represents how better the
-model $h$ is at predicting $y$ than the *dummy* predictor $h_{\text{dummy}}(x) = \bar{y}$.
+where \\(\bar{y}\\) is the average value of the target on the test set. Simply put, the \\(R^2\\) represents how better the
+model \\(h\\) is at predicting \\(y\\) than the *dummy* predictor \\(h^{\text{dummy}}=\bar{y}\\).
 
 ```python
 from sklearn.pipeline import Pipeline
@@ -109,17 +109,17 @@ Would you deploy them if you were working at a bike rental company? Personally,
 the current results are not enough to convince me. Indeed, we have reported some encouraging indices
 of performance, yet we do not know how the program works internally. What if there is a bug in the model?
 What if the model does not work well in deployment? We cannot answer those questions with certainty because
-our models are **black-boxes**: they take an input $x$ and return an output $h(x)$, but we do not understand the
+our models are **black-boxes**: they take an input \\(x\\) and return an output \\(h(x)\\), but we do not understand the
 mechanisms involved.
 
 ![bb](/images/blog-bb/bb.png)
 
-Our lack of understanding of $h$ is the main motivation behind eXplainable Artificial Intelligence (XAI), a research
+Our lack of understanding of \\(h\\) is the main motivation behind eXplainable Artificial Intelligence (XAI), a research
 initiative to shed light on the decision-making of ML models. This research field has recently introduced many techniques
 
-1. Local Feature Attributions $\phi_i(h, x)\,\forall i=1,2,\ldots,d$ are vectors that attribute to each feature an
-importance toward the prediction $h(x)$.
-2. Global Feature Importance $\Phi_i(h)\,\forall i=1,2,\ldots,d$ are positive vectors that illustrates how much the
+1. Local Feature Attributions \\(\phi_i(h, x)\,\forall i=1,2,\ldots,d\\) are vectors that attribute to each feature an
+importance toward the prediction \\(h(x)\\).
+2. Global Feature Importance \\(\Phi_i(h)\,\forall i=1,2,\ldots,d\\) are positive vectors that illustrates how much the
 feature is used overall by the model.
 
 We will focus on Global Feature Importance as they are the simplest to understand. We will employ three techniques
@@ -169,6 +169,7 @@ the post-hoc explainers, we cannot trust the model in the first place and we are
 
 The simple example of explanation disagreements I presented occurs in a variety of ML use-cases and models
 [(Krishna et al., 2022)](https://arxiv.org/abs/2202.01602). This issue is called the Disagreement Problem and it
-highlights the need to **quantify** trust in explainability methods. Otherwise, when explanations provide contradictory interpretations, practitioners cannot be expected to pick the right one. This is the main motivation behind my PhD research :
-*how do we quantify trust in post-hoc explanation methods?* I will not have the time to present my ideas/solutions in this
+highlights the need to **quantify** trust in explainability methods. Otherwise, when explanations provide contradictory 
+interpretations, practitioners cannot be expected to pick the right one. This is the main motivation behind my PhD research :
+*How can the correctness of conflicting post-hoc explanations be determined?* I will not have the time to present my ideas/solutions in this
 blog post, but future posts will discuss them. Stay tuned!
