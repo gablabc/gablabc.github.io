@@ -1,7 +1,7 @@
 ---
-title: 'Are Explainers Just Another Black-box?'
+title: 'The Disagreement Problem in Explainability'
 date: 2024-10-20
-permalink: /posts/2023/10/Another-Black-Box/
+permalink: /posts/2023/10/Disagreements/
 tags:
   - Post-hoc Explainers
   - Black Boxes
