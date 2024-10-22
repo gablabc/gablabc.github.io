@@ -1,7 +1,7 @@
 ---
 title: 'Are Explainers Just Another Black-box?'
-date: 2024-03-12
-permalink: /posts/2023/03/Another-Black-Box/
+date: 2024-10-20
+permalink: /posts/2023/10/Another-Black-Box/
 tags:
   - Post-hoc Explainers
   - Black Boxes
@@ -36,7 +36,8 @@ and temperatures. In this new paradigm, you would need access to data comprised 
 of \\(N\\) instances.
 2. A \\((N,)\\) vector **y** containing the actual number of bike rentals for the given instance.
 
-Here is an example of such a dataset available in the [PyFD](https://github.com/gablabc/PyFD) Python library.
+Here is an example of such a dataset available in the package [PyFD](https://github.com/gablabc/PyFD) 
+![](https://raw.githubusercontent.com/gablabc/PyFD/master/docs/Images/PyFD.svg){:height="50px" width="50px"}.
 
 ```python
 import numpy as np
@@ -49,7 +50,7 @@ print(X.shape)
 >>> (17379, 10)
 print(y.shape)
 >>> (17379,)
-print(features.print_names())
+print(features.names())
 >>> ['yr', 'mnth', 'hr', 'holiday', 'weekday', 'workingday', 'weathersit', 'temp', 'hum', 'windspeed']
 ```
 
@@ -125,51 +126,44 @@ feature is used overall by the model.
 We will focus on Global Feature Importance as they are the simplest to understand. We will employ three techniques
 [Partial Dependence Plots (PDP)](https://scikit-learn.org/stable/modules/partial_dependence.html),
 [Permutation Feature Importance (PFI)](https://scikit-learn.org/stable/modules/permutation_importance.html),
-[SHAP](https://github.com/shap/shap). Here is how you would compute the global feature importance of the Gradient Boosted Trees
-using SHAP
+[SHAP](https://github.com/shap/shap). Here is how you would compute them on `model_3`.
 
 ```python
-from pyfd.shapley import interventional_treeshap
+from pyfd.decompositions import get_components_tree, get_PDP_PFI_importance
+from pyfd.shapley import interventional_treeshap, get_SHAP_importance
 from pyfd.plots import bar
 
-shapley_values = interventional_treeshap(model_3, X_test, X_test, algorithm="leaf")
-global_shapley_importance = np.mean(np.abs(shapley_values), axis=0)
-bar(global_shapley_importance, features.print_names())
+decomposition = get_components_tree(model_3, X_test, X_test, features, anchored=True)
+shapley_values = interventional_treeshap(model_3, X_test, X_test, features, algorithm="leaf")
+I_PDP, I_PFI = get_PDP_PFI_importance(decomposition)
+I_SHAP = get_SHAP_importance(shapley_values)
+bar([I_PFI, I_SHAP, I_PDP], features.names())
 plt.xlabel("Global Feature Importance")
 plt.show()
 ```
 
-![bb](/images/blog-bb/importance.png)
-
-This bar chart shows the global importance of the ten features in our dataset. We note that the Gradient Boosted Trees
-relies more on the feature `hr` than any other features. This is an example of insight that post-hoc explanations can give you
-on your model.
-
-## Another Black-box?
-
-Ok, now do you trust that the Gradient Boosted Trees is a good program? **I still don't!** The reason is that the explanation methods are
-themselves very complicated and hard to understand. I would even argue that they are another black box on top of the old
-one.
-
-![bb](/images/blog-bb/bb_2.png)
-
-Even worst, it is very hard to judge the quality of an explanation. This makes explanations evaluation even harder than
-model evaluation. Indeed, although our models are black-boxes, we can still evaluate their test set performance to get some
-idea of which model is better/worst that the others. We do not have access to such metrics in explainability : if I compute a
-PDP, SHAP, and PFI feature importance, it is not clear which one is best.
-
 ![bb](/images/blog-bb/importance_3.png)
 
-This figure presents the feature importance yielded by three different explainers (PFI, SHAP, PDP) in different opacities
-(opaque, semi-transparent, transparent). We see that explainers do not agree on the importance of `workingday` : PFI says its
-important while PDP says it is not. Which one is right? This is an important question to address because if we cannot trust
-the post-hoc explainers, we cannot trust the model in the first place and we are back to square one.
+This bar chart presents the feature importance yielded by three different explainers (PFI, SHAP, PDP) in different opacities
+(opaque, semi-transparent, transparent). We note that all three methods agree the Gradient Boosted Trees
+rely more on the feature `hr` than any other features. This is an example of insight that post-hoc explanations can 
+give you on your model.
 
-## Ouverture
+## The Disagreement Problem
 
-The simple example of explanation disagreements I presented occurs in a variety of ML use-cases and models
-[(Krishna et al., 2022)](https://arxiv.org/abs/2202.01602). This issue is called the Disagreement Problem and it
-highlights the need to **quantify** trust in explainability methods. Otherwise, when explanations provide contradictory 
-interpretations, practitioners cannot be expected to pick the right one. This is the main motivation behind my PhD research :
-*How can the correctness of conflicting post-hoc explanations be determined?* I will not have the time to present my ideas/solutions in this
-blog post, but future posts will discuss them. Stay tuned!
+However, we see that explainers do **not** agree on the importance of `workingday` : PFI says its
+the second most important feature while PDP says it is not important at all. *Which one of these interpretations is correct?* This is an 
+important question to address because if we cannot trust the post-hoc explainers, we cannot trust the model in the first place and we 
+are back to square one.
+
+The simple example of explanation disagreements I presented occurs in a variety of ML use-cases and models. 
+Even worse, [(Krishna et al., 2022)](https://arxiv.org/abs/2202.01602) have interviewed 25 data scientists who use XAI techniques daily and found out that they 
+did not know how to handle disagreements between explainability methods. Practitionners instead relied on heuristics such as sticking to their prefered method or 
+whichever explanations best matched their intuition. 
+
+Still, we argue that choosing explanations this way is risky since humans are prone to confirmation biases. It is better to select the correct explanation based on their
+*correctness*, which leads to my main research question:
+
+>How can the correctness of conflicting post-hoc explanations be determined?
+
+I will not have the time to present my ideas/solutions in this blog post, but future posts will discuss them. Stay tuned!

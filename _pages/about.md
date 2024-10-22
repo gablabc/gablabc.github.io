@@ -14,8 +14,7 @@ My current research interests are in the field of eXplainable Artificial Intelli
 to make complex black-box models more interpretable. Indeed, although complex models such as Random Forests or
 Neural Network attain high performance, they are not easily understood by humans. Depending on the task, not being
 able to explain predictions can be a considerable roadblock toward model acceptance and deployment. For instance, think of
-safety-critical domains such as Aerospace, or applications where human beings are impacted by decisions:
-Medicine, Banking, and Insurance.
+safety-critical domains such as Aerospace, or applications where human beings are impacted by decisions: Medicine, Banking, and Insurance.
 
 Various post-hoc techniques have been proposed to get insight into model behavior, notably
 [Partial Dependence Plots (PDP)](https://scikit-learn.org/stable/modules/partial_dependence.html),
@@ -35,16 +34,15 @@ My Doctoral degree is part of the [DEEL](https://deel.quebec/) research initiati
 The first question is tackled in our [FDTrees](https://gablabc.github.io/publication/FDTrees.html) paper
 where various post-hoc explanations are unified through the lens of **Functional Decompositions** and it is demonstrate that
 disagreements are caused by so-called **Feature Interactions**. This discovery clarifies the relationship between the various explainers.
-For the second question, we propose to use **Uncertainty** as a proxy of trustworthiness of post-hoc explanations. The higher the
-uncertainty, the lower the trust. We define three critical types of uncertainties that we recommend computing in a XAI pipeline :
+For the second question, we propose to use **Disagreements** as a proxy of trustworthiness of post-hoc explanations. The stronger the
+disagreements, the lower the trust. We define three critical types of disagreements that we recommend computing in a XAI pipeline :
 
-- **Oversimplification uncertainty**: the amount by which the explanation oversimplifies the model because of feature
-interactions. This uncertainty is reduced by using [FDTrees](https://gablabc.github.io/publication/FDTrees.html).
-- **Sub-sampling uncertainty** : the stochasticity induced by the necessity to provide subsamples of data to the explainers
+- **Oversimplification Disagreement**: the amount by which the PDP/SHAP/PFI explanation disagree because of feature
+interactions. This disagreement is reduced by using [FDTrees](https://gablabc.github.io/publication/FDTrees.html).
+- **Sub-sampling Disagreement** : the stochasticity induced by the necessity to provide subsamples of data to the explainers
 instead of the whole dataset. The importance of considering this uncertainty is demonstrated by our
 [FoolSHAP](https://gablabc.github.io/publication/fool_SHAP.html) attack that can make an unfair model look acceptable.
-- **Under-specification uncertainty** : the uncertainty caused by the existence of an equivalent class of models with good
-empirical performance *i.e* a Rashomon Set. This methodology is introduced in our
-[JMLR](https://gablabc.github.io/publication/partial_order.html) paper.
+- **Under-specification Disagreement** : the disagreements between two models with equivalent performance *i.e* all models in the Rashomon Set. 
+This methodology is introduced in our [JMLR](https://gablabc.github.io/publication/partial_order.html) paper.
 
 Each of these is elaborated on in a published article from my PhD thesis.

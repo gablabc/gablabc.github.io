@@ -1,7 +1,7 @@
 ---
 title: 'What is Functional Decomposition?'
-date: 2024-04-11
-permalink: /posts/2023/04/FD/
+date: 2025-04-11
+permalink: /posts/2025/04/FD/
 tags:
   - Functional Decomposition
   - Anchored Decomposition
@@ -18,7 +18,7 @@ Let's say you have a machine learning model \\(h\\) that takes a \\(d\\)-dimenti
 and returns a prediction \\(h(x)\\). Each component \\(x_j\\) of the input vector is called a *feature*.
 Functional Decomposition aims at describing \\(h(x)\\) as a sum
 
-$$h(x) = h_{\emptyset} + \sum_{j=1}^dh_{j}(x_j) + \sum_{i< j}h_{i,j}(x_i, x_j)+\ldots$$
+$$h(x) = h_{\emptyset} + \sum_{j=1}^dh_{j}(x_j) + \sum_{i\lt j}h_{i,j}(x_i, x_j)+\ldots$$
 
 The term \\(h_{\emptyset}\\) is a constant called the intercept. The sub-functions \\(h_{j}(x_j)\\) that each depend on a
 single feature \\(x_j\\) are called main-effects. Finally, the terms \\(h_{i,j}(x_i, x_j)\\) are called
