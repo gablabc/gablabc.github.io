@@ -40,7 +40,7 @@ Visually, you can see Linear Models as the first floor of the ladder we must cli
 
 ## Naively Explaining Linear Models
 
-Imagine using a Linear Model to predict the risk that an bank applicant will default on their loan. Assuming the model \\(h(x)\\) returns a high-risk, the
+Imagine using a Linear Model to predict the risk that a bank applicant will default on their loan. Assuming the model \\(h(x)\\) returns a high-risk, the
 applicant \\(x\\) might be entitled to know which characteristics \\(x_i\\) led to said risk. That person would be reassured to know that the prediction was impacted by factor under their
 control (credit-score, salary, etc.) and not on more sensitive information (location, age, race). But how do you explain the **importance** of feature \\(x_i\\) toward a specific
 prediction \\(h(x)\\)? It is tempting to use the following definition
@@ -148,11 +148,11 @@ print(f"Local Importance of x_explain_prime : {float(model_prime.coef_[0]*x_expl
 >> Local Importance of x_explain_prime : 0.39
 ```
 
-This is **not** the same feature importance that we had for \\(h\\) (it was -1.15). This is problematic because the loan applicant can receive 
+This is **not** the same feature importance that we had for \\(h(x)\\) (it was -1.15). This is problematic because the loan applicant can receive 
 two different explanations for the same loan rejection.
 
 > Feature Importance scores should be invariant to modeling choices that keep the predictions on data intact.
-> Such choices include any affine transformation \\(x'=ax+b\\) applied before feeding data to a Linear Model.
+> Such choices include any affine transformation \\(x'=ax+b\\) applied before training a Linear Model.
 
 ## Correctly Explaining Linear Models
 
@@ -172,17 +172,17 @@ which is the difference between the prediction of interest \\(h(x)\\) and the ba
 Dirac measure \\(\delta_z\\) centered at house \\(z\\).
 
 Here is how the package [PyFD](https://github.com/gablabc/PyFD) ![](https://raw.githubusercontent.com/gablabc/PyFD/master/docs/Images/PyFD.svg){:height="50px" width="50px"}
-advocates reporting the local importance of $x_i$ toward the Gap.
+advocates reporting the local importance of \\(x_i\\) toward the Gap.
 
 $$\text{Local Importance of } x_i = \omega_i\,(x_i - \mathbb{E}_{z\sim\mathcal{B}}[z_i]).$$
 
 These local importance measure have the property of summing to the Gap
 
-$$\sum_{i=1}^d \text{Feature Importance of } x_i = G(h, x, \mathcal{B}),$$
+$$\sum_{i=1}^d \text{Local Importance of } x_i = G(h, x, \mathcal{B}),$$
 
-but are they are also **invariant** to afine transformations (\\(x'=ax+b\\)) on individual input features.
-To see how, lets go back to our toy model and answer the question : *why is the individual attributed a higher default risk than the average population?*
-To answer this contrastive question, we must set the background distribution \\(\mathcal{B}\\) to the empirical distribution over the whole data set.
+but are they are also **invariant** to affine transformations (\\(x'=ax+b\\)) on individual input features.
+To see how, lets go back to our toy model and answer the question : *why is the red star individual predicted a higher default risk than the average population?*
+To answer this contrastive question, we must set the background distribution \\(\mathcal{B}\\) to the empirical distribution over the whole dataset.
 ```python
 from pyfd.decompositions import get_components_linear
 from pyfd.feature import Features
@@ -223,7 +223,7 @@ Consequently, the explanation for the loan rejection of the applicant (the red s
 
 I hope you can appreciate that explaining a Linear Model is not as trivial is it might seem at first glance.
 The notion of explaining predictions \\(h(x)\\) **relative** to the average prediction \\(\mathbb{E}_{z\sim\mathcal{B}}[h(z)]\\)
-over a background distribution \\(\mathcal{B}\\) appears naturally when we wish to derive explanations to Linear Model predictions that
+over a background distribution \\(\mathcal{B}\\) appears naturally when we wish to derive Linear Model explanations that
 are invariant to modeling choices such as feature standardization. In future blogs, we will see that relative explanations also appear naturally
 when investigation a more general class of models : **Additive Models**.
 
