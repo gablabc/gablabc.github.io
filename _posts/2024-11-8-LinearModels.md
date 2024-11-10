@@ -91,7 +91,7 @@ plt.ylabel("y")
 
 Here, the blue points are the data, the thick black line is the model prediction \\(h(x)\\) on all \\(x\\) values, and the red star is the point of interest \\(x_{\text{explain}}\\) along with the
 prediction \\(h(x_{\text{explain}})\\). Assuming the target \\(y\\) represents the risk of defaulting on your credit, the red star may represent an applicant who was predicted
-as high-risk by the model and so saw their loan rejected. This individual asks for an explanation for their loan rejection.
+as high-risk by the model and so saw their loan rejected. This individual asks for an explanation for their loan rejection. Let's try reporting the local importance \\(\omega x_{\text{explain}}\\).
 
 ```python
 print(f"Local Importance  of x_explain : {float(model.coef_[0]*x_explain[0]):.2f}")
@@ -141,7 +141,7 @@ plt.ylabel("y")
 
 This new model \\(h'\\) is essentially a horizontally shifted image of the original one \\(h\\).
 Although it is not the same **function**, they make the same prediction on the data. That is, the individual \\(x_{\text{explain}}'\\) (the red star) is
-still predicted as high risk and so their loan is rejected. Using this new model, the explanation \\(\omega_1'x'\\) becomes
+still predicted as high risk and so their loan is rejected. Using this new model, the explanation \\(\omega_1'x'_{\text{explain}}\\) becomes
 
 ```python
 print(f"Local Importance of x_explain_prime : {float(model_prime.coef_[0]*x_explain_prime[0]):.2f}")
