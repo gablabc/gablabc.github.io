@@ -80,7 +80,7 @@ plt.plot(line, model.intercept_ + model.coef_[0]*line, 'k-', linewidth=4)
 plt.scatter(x_explain, pred, marker="*", c='r', s=200, zorder=3)
 # The local importance at x_explain
 plt.plot([0, x_explain, x_explain], [model.intercept_, model.intercept_, pred], 'k--', linewidth=2)
-plt.text(x_explain+0.07, (model.intercept_ +  pred) / 2, r"$\omega x$")
+plt.text(x_explain+0.07, (model.intercept_ +  pred) / 2, r"$\omega x_{\text{explain}}$")
 plt.xlim(-0.2, 2)
 plt.ylim(0, 2.2)
 plt.xlabel("x")
@@ -89,8 +89,8 @@ plt.ylabel("y")
 
 ![invariance_1](/images/blog-bb/linear_invariance_1.png)
 
-Here, the blue points are the data, the black dashed line is the model prediction \\(h(x)\\) while the red star is the point of interest \\(x_{\text{explain}}\\) along with the
-prediction \\(h(x_{\text{explain}})\\). Assuming the target \\(y\\) represents the risk of defaulting on your credit, the red star represents an applicant who was predicted
+Here, the blue points are the data, the thick black line is the model prediction \\(h(x)\\) on all \\(x\\) values, and the red star is the point of interest \\(x_{\text{explain}}\\) along with the
+prediction \\(h(x_{\text{explain}})\\). Assuming the target \\(y\\) represents the risk of defaulting on your credit, the red star may represent an applicant who was predicted
 as high-risk by the model and so saw their loan rejected. This individual asks for an explanation for their loan rejection.
 
 ```python
@@ -121,17 +121,17 @@ pred_prime = model_prime.intercept_ + model_prime.coef_[0]*x_explain_prime
 
 plt.figure()
 # Plot the data
-plt.scatter(X_prime.ravel(), y)
-plt.vlines(0, -2, 2, 'k', linewidth=1)
+plt.scatter(X_.ravel(), y)
+plt.vlines(0, -2.6, 2, 'k', linewidth=1)
 # Plot the model predictions
-line = np.linspace(-2, 2, 10)
-plt.plot(line, model_prime.intercept_ + model_prime.coef_[0]*line, 'k-', linewidth=4)
-# The point to explain
-plt.scatter(x_explain_prime, pred_prime, marker="*", c='r', s=200, zorder=3)
-# The local importance
-plt.plot([0, x_explain_prime, x_explain_prime], [model_prime.intercept_, model_prime.intercept_, pred_prime], 'k--', linewidth=2)
-plt.text(x_explain_prime-0.5, 0.45 * (model_prime.intercept_ +  pred_prime), r"$\omega'x'$")
-plt.xlim(-2, 2)
+line = np.linspace(-2.6, 2, 10)
+plt.plot(line, model_.intercept_ + model_.coef_[0]*line, 'k-', linewidth=4)
+# Plot the point to explain
+plt.scatter(x_explain_, pred_, marker="*", c='r', s=200, zorder=3)
+# The local Importance
+plt.plot([0, x_explain_, x_explain_], [model_.intercept_, model_.intercept_, pred_], 'k--', linewidth=2)
+plt.text(x_explain_-1.3, 0.45 * (model_.intercept_ +  pred_), r"$\omega'x'_{\text{explain}}$")
+plt.xlim(-2.6, 2)
 plt.ylim(-0.2, 1.25)
 plt.xlabel("x'")
 plt.ylabel("y")
@@ -139,7 +139,7 @@ plt.ylabel("y")
 
 ![invariance_2](/images/blog-bb/linear_invariance_2.png)
 
-This new model \\(h'\\) is essentially a horizontally shifted image of the original one \\(h\\)
+This new model \\(h'\\) is essentially a horizontally shifted image of the original one \\(h\\).
 Although it is not the same **function**, they make the same prediction on the data. That is, the individual \\(x_{\text{explain}}'\\) (the red star) is
 still predicted as high risk and so their loan is rejected. Using this new model, the explanation \\(\omega_1'x'\\) becomes
 
@@ -148,7 +148,7 @@ print(f"Local Importance of x_explain_prime : {float(model_prime.coef_[0]*x_expl
 >> Local Importance of x_explain_prime : 0.39
 ```
 
-This is **not** the same feature importance that we had for \\(h(x)\\) (it was -1.15). This is problematic because the loan applicant can receive 
+This is **not** the same feature importance that we had for \\(h(x_{\text{explain}})\\) (it was -1.15). This is problematic because the loan applicant can receive 
 two different explanations for the same loan rejection.
 
 > Feature Importance scores should be invariant to modeling choices that keep the predictions on data intact.
