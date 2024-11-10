@@ -121,16 +121,16 @@ pred_prime = model_prime.intercept_ + model_prime.coef_[0]*x_explain_prime
 
 plt.figure()
 # Plot the data
-plt.scatter(X_.ravel(), y)
+plt.scatter(X_prime.ravel(), y)
 plt.vlines(0, -2.6, 2, 'k', linewidth=1)
 # Plot the model predictions
 line = np.linspace(-2.6, 2, 10)
-plt.plot(line, model_.intercept_ + model_.coef_[0]*line, 'k-', linewidth=4)
+plt.plot(line, model_prime.intercept_ + model_prime.coef_[0]*line, 'k-', linewidth=4)
 # Plot the point to explain
-plt.scatter(x_explain_, pred_, marker="*", c='r', s=200, zorder=3)
+plt.scatter(x_explain_prime, pred_prime, marker="*", c='r', s=200, zorder=3)
 # The local Importance
-plt.plot([0, x_explain_, x_explain_], [model_.intercept_, model_.intercept_, pred_], 'k--', linewidth=2)
-plt.text(x_explain_-1.3, 0.45 * (model_.intercept_ +  pred_), r"$\omega'x'_{\text{explain}}$")
+plt.plot([0, x_explain_prime, x_explain_prime], [model_prime.intercept_, model_prime.intercept_, pred_prime], 'k--', linewidth=2)
+plt.text(x_explain_prime-1.3, 0.45 * (model_prime.intercept_ +  pred_prime), r"$\omega'x'_{\text{explain}}$")
 plt.xlim(-2.6, 2)
 plt.ylim(-0.2, 1.25)
 plt.xlabel("x'")
