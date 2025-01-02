@@ -138,11 +138,11 @@ was problematic, and so this definition cannot be right. To see why this definit
 functions are redundant with the intercept \\(\omega_0\\).  Indeed, the basis functions presented previously sum up 
 to one at any \\(x_i\\)
 
-$$ \sum_{j=1}^{M_i} h_{ij}(x_j) = 1 \,\,\,\text{for all}\,\,\, -\infty \lt x_i\lt \infty.$$
+$$ \sum_{j=1}^{M_i} h_{ij}(x_i) = 1 \,\,\,\text{for all}\,\,\, -\infty \lt x_i\lt \infty.$$
 
-As such, any vertical shift in prediction \\(h(x) + C\\) could be accomplished by either adding \\(C\\) to the intercept
+So any vertical shift in prediction \\(h(x) + C\\) could be accomplished by either adding \\(C\\) to the intercept
 \\(\omega_0\\), or by adding \\(C\\) to all weights : \\(\omega_{i1}, \omega_{i2}, \ldots \omega_{iM_i}\\).
-As such, there is an **infinite** number of weights \\(\omega\\) that fit the data well. The Scikit-Learn
+Consequently, there is an **infinite** number of weights \\(\omega\\) that fit the data well. The Scikit-Learn
 class `LinearRegression` was kind enough to return a single solution (using a pseudo-inverse), but don't be fooled:
 there is an infinity of solutions.
 
@@ -150,7 +150,7 @@ there is an infinity of solutions.
 > \\(C\\) from the intercept \\(\omega_0\\) leads to an identical function \\(h'\\) but with different local
 > feature importance.
 
-The typical methodology to get have a **single optimal** solution \\(\omega\\) is to remove one basis function along 
+The typical methodology to yield a **single optimal** solution \\(\omega\\) is to remove one basis function along 
 each feature \\(i\\). This will ensure that the basis functions do not sum to \\(1\\) and so they are no longer redundant 
 with the intercept.
 
@@ -231,7 +231,7 @@ $$\sum_{i=1}^d \text{Local Importance of } x_i = G(h, x, \mathcal{B}),$$
 
 but are they are also **invariant** to the choice of which basis function is removed. 
 To confirm, we compute two additive models that either remove the last or the first basis.
-By comparing their predictions over the whole data, we confirm both models are indeed different parametrization 
+By comparing their predictions over the whole data, we confirm both models are indeed different parametrizations 
 of the same function.
 
 ```python
