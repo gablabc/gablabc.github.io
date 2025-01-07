@@ -21,12 +21,12 @@ $$ h(x) = \omega_0 + \sum_{i=1}^d  h_i(x_i),$$
 
 
 We have seen previously how to model the shape functions using basis function multiplied by learned parameters. 
-The issue with this method is that the basis functions must be determined apriori. How many bases should be used? 
+The issue with this method is that the basis functions must be determined apriori. How many basis functions should be used? 
 Where should they be placed? Bad basis placemement may lead to subpar performance, especially if there are steep jumps 
 in the function that must be approximated. Fitting such jumps would require placing sufficiently many basis functions 
 at the correct position before even fitting the model.
 
-The alternative is to not employ parameters, and instead use **Univariate Decision-Trees** to represent the shape
+The alternative is to not employ parameters and instead use **Univariate Decision-Trees** to represent the shape
 function \\(h_i\\). A Univariate Decision Tree \\(t(x_i)\\) is a tree whose internal nodes encode boolean 
 statements (True or False) on feature \\(x_i\\), and whose leaf encode a single prediction.
 
@@ -155,7 +155,7 @@ Although \\(h\\) and \\(h'\\) make identical predictions on any input, the local
 
 ### Correctly Explaining the Model
 
-Rather than explaining the prediction \\(h(x)\\), we should explain the Gap between the prediction and reference.
+Rather than explaining the prediction \\(h(x)\\), we should explain the Gap between the prediction and a reference.
 
 $$G(h, x, \mathcal{B}) = h(x) - \mathbb{E}_{z\sim\mathcal{B}}[h(z)].$$
 
@@ -234,13 +234,14 @@ to see a difference favoring men.
 
 > :warning: **We are reporting Gaps in the numerical score \\(h(x)\\) and not the binary predictions \\(\widehat{y}\\)**.
 > Although it is more common in the literature to report disparities in binary predictions, such reports have the downsides
-> of depending on the choice of cuttoff treshold \\(\gamma\\) and they are also unexplainable. On the contrary,
-> disparities in the numerical outputs \\(h(x)\\) are not affected by \\(\gamma\\) and are explainable by design since they 
-> are the function is additive. 
+> of depending on the choice of cuttoff treshold \\(\gamma\\) and not being additive.
+> Disparities in the numerical outputs \\(h(x)\\), on the other hand,  are not affected by \\(\gamma\\) and are 
+> explainable by design.
 
 ```python
-test_women = X_test[gender_test=="Female"] 
-test_men = X_test[gender_test=="Male"] 
+# Use the gender feature to partion the test set in to women and men
+test_women = X_test[gender_test=="Female"]
+test_men = X_test[gender_test=="Male"]
 # model.decision_function returns the numerical output
 Gap = model.decision_function(test_men).mean() - model.decision_function(test_women).mean()
 print(Gap)
@@ -271,7 +272,7 @@ from pyfd.plots import bar
 # Compute the local feature importance for all men and women
 decomp_women = get_components_ebm(model, test_women, background, features)
 decomp_men = get_components_ebm(model, test_men, background, features)
-# Report the difference in the average
+# Compute E[h_i(x_i)|man] - E[h_i(x_i)|woman] 
 fairness_importance = np.stack([decomp_men[(i,)].mean() - decomp_women[(i,)].mean() for i in range(len(features))])
 bar(fairness_importance, features.names())
 ```
@@ -292,15 +293,15 @@ plot_legend(["Men", "Women"])
 ![spline_basis](/images/blog-bb/EBM_adults_legend.png)
 
 The blue distribution represents men, while in red one represents women. The importance of \\(x_i\\) toward the
-men/women Gap is the difference in average of \\(h_i\\) between these two distributions. These plots reveal
-that a larger proportion of women (compared to men) are not married. Since being married increases the model
+men-women Gap is the difference between the average of \\(h_i\\) for the blue and red distributions. These plots 
+reveal that a larger proportion of women (compared to men) are not married. Since being married increases the model
 numerical output, men have (on average) a higher score than women. 
 
 ## Ouverture
 
 Explainable Boosting Machines (EBMs) are state-of-the-art Non-Parametric Additive 
 Models. Such models can be explained locally, they can be edited to better align with prior-knowledge, 
-and they can explain disparities between subgroups (*e.g.* men and women). As a result,As a result,  EBMs are my **go-to** method
-whenever I am starting exploring a new dataset or Machine Learning usecase.
+and they can explain disparities between subgroups (*e.g.* men and women). As a result,  EBMs are my **go-to** method
+whenever I am starting a new Machine Learning project.
 
 
