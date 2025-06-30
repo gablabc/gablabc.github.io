@@ -1,7 +1,7 @@
 ---
 title: 'What is Functional Decomposition?'
 date: 2025-04-11
-permalink: /posts/2025/04/FD/
+permalink: /posts/2025/04/FD
 tags:
   - Functional Decomposition
   - Anchored Decomposition

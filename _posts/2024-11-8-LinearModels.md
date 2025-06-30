@@ -1,7 +1,7 @@
 ---
 title: 'Explaining Linear Models'
 date: 2024-11-8
-permalink: /posts/2024/11/Linear/
+permalink: /posts/2024/11/Linear
 tags:
   - Explainability
   - Linear Models

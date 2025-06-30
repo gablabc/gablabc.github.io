@@ -1,7 +1,7 @@
 ---
 title: 'Explaining Non-Parametric Additive Models'
 date: 2025-01-07
-permalink: /posts/2025/01/NonParametricAdditive/
+permalink: /posts/2025/01/NonParametricAdditive
 tags:
   - Explainability
   - Additive Models

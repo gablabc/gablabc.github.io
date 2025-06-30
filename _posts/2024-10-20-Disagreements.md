@@ -1,7 +1,7 @@
 ---
 title: 'The Disagreement Problem in Explainability'
 date: 2024-10-20
-permalink: /posts/2023/10/Disagreements/
+permalink: /posts/2023/10/Disagreements
 tags:
   - Post-hoc Explainers
   - Black Boxes

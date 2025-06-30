@@ -1,7 +1,7 @@
 ---
 title: 'Explaining Parametric Additive Models'
 date: 2024-11-19
-permalink: /posts/2024/11/ParametricAdditive/
+permalink: /posts/2024/11/ParametricAdditive
 tags:
   - Explainability
   - Additive Models
